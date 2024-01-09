@@ -10,7 +10,4 @@ class homeController extends Controller
         return view('dashboard');
     }
 
-    public function tester(){
-        return 'Hola mundo';
-    }
 }
