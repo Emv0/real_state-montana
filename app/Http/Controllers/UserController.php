@@ -12,9 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate();
+        $users = User::all();
         
-        return view('users.index',compact('users'));
+        return view('users.index', compact('users'));
     }
             
     /**
@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -36,9 +36,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+
+        $user = User::find($id);
+
+        return view('users.show', compact('user'));
     }
 
     /**

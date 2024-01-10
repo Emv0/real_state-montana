@@ -21,3 +21,5 @@ Route::get('/', [homeController::class, 'index']);
 Route::get('/inmuebles',[StateController::class,'index'])->name('state.index');
 
 Route::get('/usuarios', [UserController::class, 'index'])->name('user.index');
+Route::get('/usuarios/registrar', [UserController::class, 'create'])->name('user.create');
+Route::get('/usuario/{usuario}',[UserController::class, 'show'])->name('user.show');

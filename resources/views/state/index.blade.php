@@ -4,7 +4,7 @@
 
 @section('content')
    
-    <h2>Inmuebles</h2>
+    <h2 class="h2">Inmuebles</h2>
 
 @endsection
 
