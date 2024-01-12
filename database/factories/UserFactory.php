@@ -25,12 +25,11 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'number' => fake()->phoneNumber(),
+            'identification'=>fake()->unique()->randomNumber(),
+            'phone' => fake()->phoneNumber(),
             'age' => fake()->randomElement(['25','23','33','21','27','28','29','30','31','26']),
-            'type_user' => fake()->randomElement(['Administrador', 'Cliente', 'Asesor']),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'type_user' =>fake()->randomElement(['1','2']),
             'remember_token' => Str::random(10),
         ];
     }

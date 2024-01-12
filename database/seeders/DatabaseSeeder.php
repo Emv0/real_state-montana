@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Property;
+use App\Models\TypesUsers;
 use App\Models\User;
-use App\Models\State;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,12 +16,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $this->call(TypeUserSeeder::class);
+
         User::factory(100)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        State::factory(100)->create();
+
+        Property::factory(100)->create();
     }
 }

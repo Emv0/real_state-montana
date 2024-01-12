@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('states', function (Blueprint $table) {
+        Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->string('tipoInmueble');
-            $table->string('zona');
-            $table->text('descripcion');
-            $table->string('direccion');
-            $table->string('imagenInmueble');
+            $table->string('propertiesType');
+            $table->string('zone');
+            $table->text('description');
+            $table->string('address');
+            $table->string('propertyImage');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('states');
+        Schema::dropIfExists('properties');
     }
 };

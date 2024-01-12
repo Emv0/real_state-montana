@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\homeController;
-use App\Http\Controllers\StateController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [homeController::class, 'index']);
 
-Route::get('/inmuebles',[StateController::class,'index'])->name('state.index');
+Route::get('/inmuebles',[PropertyController::class, 'index'])->name('state.index');
+Route::get('/inmuebles/registrar',[PropertyController::class, 'create'])->name('property.create');
+Route::get('/inmuebles/{inmueble}',[PropertyController::class, 'show'])->name('property.show');
 
 Route::get('/usuarios', [UserController::class, 'index'])->name('user.index');
-Route::get('/usuarios/registrar', [UserController::class, 'create'])->name('user.create');
+Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
 Route::get('/usuario/{usuario}',[UserController::class, 'show'])->name('user.show');

@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
 use Illuminate\Http\Request;
 
-class StateController extends Controller
+class PropertyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('state.index');
+        $properties = Property::all();
+
+        return view('state.index',compact('properties'));
     }
 
     /**
@@ -33,9 +36,12 @@ class StateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+
+        $properties = Property::find($id);
+
+        return view('state.show', compact('properties'));
     }
 
     /**
