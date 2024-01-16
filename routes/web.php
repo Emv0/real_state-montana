@@ -24,4 +24,5 @@ Route::get('/inmuebles/{inmueble}',[PropertyController::class, 'show'])->name('p
 
 Route::get('/usuarios', [UserController::class, 'index'])->name('user.index');
 Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
+Route::get('/usuario/{id}/editar',[UserController::class, 'edit'])->name('user.edit');
 Route::get('/usuario/{usuario}',[UserController::class, 'show'])->name('user.show');

@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'age' => fake()->randomElement(['25','23','33','21','27','28','29','30','31','26']),
             'email' => fake()->unique()->safeEmail(),
-            'type_user' =>fake()->randomElement(['1','2']),
+            'type_user' =>fake()->randomElement(['1','2','3']),
             'remember_token' => Str::random(10),
         ];
     }

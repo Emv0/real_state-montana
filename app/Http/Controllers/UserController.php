@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TypesUsers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -12,9 +14,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::join('types_users', 'types_users.id', '=', 'users.type_user')
+        ->select("users.*","types_users.type_user")
+        ->get();
+
+        $types = TypesUsers::all();
         
-        return view('users.index', compact('users'));
+        // return print_r($types); 
+        return view('users.index', compact('users','types'));
     }
             
     /**
@@ -22,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+
     }
 
     /**
@@ -30,8 +37,39 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        return $data;
+        $validator = Validator::make($request->all(), [
+            'name' => 'required'
+        ]);
+
+        if($validator->fails()){
+            $errors = $validator->errors();
+            return response()->json([
+                'name' => $errors->first('name')
+            ]);
+        }
+
+        $user = new User();
+
+        $user->name = $request->name;
+        $user->identification = $request->identification;
+        $user->age = $request->age;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        if($request->type_user != "Seleccionar Usuario"){
+
+            $user->type_user = $request->type_user;
+
+
+        }else{
+
+            $user->type_user = null;
+
+        }
+
+        $user->save();
+
+        return redirect()->route('user.index');
+
     }
 
     /**
@@ -48,9 +86,13 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit($user)
+    {        
+        $types = TypesUsers::all();
+        $user = User::find($user);
+
+        return view('users.edit',compact('user','types'));
+
     }
 
     /**

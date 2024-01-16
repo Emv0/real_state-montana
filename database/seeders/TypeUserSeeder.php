@@ -15,13 +15,16 @@ class TypeUserSeeder extends Seeder
     {
 
         TypesUsers::create([
-            'type_user'=>'administrador'
+            'type_user'=>'Administrador'
         ]);
 
         TypesUsers::create([
-            'type_user'=>'cliente'
+            'type_user'=>'Cliente'
         ]);
 
+        TypesUsers::create([
+            'type_user'=>'Asesor'
+        ]);
 
     }
 }
