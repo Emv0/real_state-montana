@@ -19,7 +19,7 @@ class PropertyFactory extends Factory
         return [
 
             'propertiesType'=>$this->faker->randomElement(['Casa','Apartamento','Local','Almacén']),
-            'zone'=>$this->faker->randomElement(['Belen','Poblado','Bello','Envigado']),
+            'zone'=>$this->faker->randomElement(['Belén','Poblado','Bello','Envigado']),
             'description'=>$this->faker->paragraph(),
             'address'=>$this->faker->address(),
             'propertyImage'=>$this->faker->imageUrl()   

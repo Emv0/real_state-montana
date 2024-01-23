@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(TypeUserSeeder::class);
 
-        User::factory(100)->create();
+        // User::factory(100)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

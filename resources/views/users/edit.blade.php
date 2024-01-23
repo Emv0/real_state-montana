@@ -4,8 +4,9 @@
 
 @section('content')
 
-<form id="form_create_user" method="POST">
+<form action="{{route('user.update', $user)}}" id="form_create_user" method="POST">
     @csrf
+    @method('put')
     <div class="row">
       <div class="col-6">
         <label for="input-name" class="col-form-label">Nombre</label>
@@ -21,13 +22,14 @@
       </div>
       <div class="ml-5 row">
         <div class="col-5">
-            <label for="formSelect" class="col-form-label">Tipo de usuario</label>
-            <select name="type_user" class="form-select" name="" id="formSelect"> 
-            <option>Seleccionar Usuario</option>
+          <label for="formSelect" class="col-form-label">Tipo de usuario</label>
+          <select name="type_user" class="form-select" id="formSelect"> 
             @foreach ($types as $type)
-                <option value="{{ $type->id }}">{{ $type->type_user }}</option>
+              <option value="{{$type->id}}" {{ $user->type_user == $type->id ? 'selected' : '' }}>
+                {{$type->type_user}}
+              </option>
             @endforeach
-            </select>
+          </select>
         </div>
         <div class="col-6">
             <label for="input-phone" class="col-form-label">Teléfono</label>
@@ -36,7 +38,8 @@
       </div>
     </div>
     <div class="mt-4 pb-1 modal-footer">
-      <button class="btn btn-primary">Actualizar datos</button>
+      <a class="btn btn-primary" href="{{route('user.index')}}">Ir a usuarios</a>
+      <button type="submit" class="btn btn-primary">Actualizar datos</button>
     </div>
 </form>
 

@@ -7,7 +7,6 @@
     <h2 class="h2">Usuarios</H2>
 
     <button type="button" class="btn btn-crear btn-primary mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Crear usuario</button>
-    
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog">
         <div class="modal-content">
@@ -16,7 +15,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="form_create_user" method="POST">
+            <form action="{{route('user.store')}}" id="form_create_user" method="POST">
+              <input type="hidden" name="formulario_enviado" value="1">
               @csrf
               <div class="row">
                 <div class="col-4">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-4">
                   <label for="formSelect" class="col-form-label">Tipo de usuario</label>
-                  <select name="type_user" class="form-select" name="" id="formSelect"> 
+                  <select name="type_user" class="form-select" name="type_user" id="formSelect"> 
                     <option>Seleccionar Usuario</option>
                     @foreach ($types as $type)
                       <option value="{{ $type->id }}">{{ $type->type_user }}</option>
@@ -84,7 +84,7 @@
                         
                           <a href="{{route('user.show', $user->id)}}"><i class="fa-regular fa-eye"></i></a>
                           <a href="{{route('user.edit', $user->id)}}"><i class="fa-regular fa-pen-to-square"></i></a>
-
+                          <a href="{{route('user.show', $user->id)}}"><i class="fa-regular fa-trash-can"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -94,3 +94,24 @@
     </div>
 @endsection
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("form_create_user").addEventListener("submit", function(event) {
+          // Verificar si el campo "formulario_enviado" tiene el valor "1"
+          if (document.querySelector('input[name="formulario_enviado"]').value === "1") {
+              // Validar otros campos aquí si es necesario
+              let input_name = document.querySelector("#input-name").value;
+              let input_identification = document.querySelector('#input-identification').value;
+              let input_age = document.querySelector("#input-age").value;
+              let input_email = document.querySelector("#input-email").value;
+              let formSelect = document.querySelector("#formSelect").value;
+
+              if (input_name === "" || input_identification === "" || input_age === "" || input_email === "" || formSelect === "Seleccionar Usuario") {
+                  alert("Todos los campos deben estar llenos")
+                  event.preventDefault(); // Evitar el envío del formulario
+              }
+              
+          }
+      });
+  });
+</script>

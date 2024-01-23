@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use function PHPSTORM_META\type;
+
 class UserController extends Controller
 {
     /**
@@ -75,12 +77,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(User $user)
     {
 
-        $user = User::find($id);
-
-        return view('users.show', compact('user'));
+        $type = TypesUsers::find($user->type_user);
+        
+        return view('users.show', compact('user','type'));
     }
 
     /**
@@ -91,23 +93,35 @@ class UserController extends Controller
         $types = TypesUsers::all();
         $user = User::find($user);
 
-        return view('users.edit',compact('user','types'));
+        return view('users.edit', compact('user','types'));
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,User $user) 
     {
-        //
+        $user->name = $request->name;
+        $user->identification = $request->identification;
+        $user->age = $request->age;
+        $user->email = $request->email;
+        $user->type_user = $request->type_user;
+        $user->phone = $request->phone;
+
+        $user->save();
+
+        return redirect()->route('user.show', compact('user'));
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('user.index');
     }
 }
