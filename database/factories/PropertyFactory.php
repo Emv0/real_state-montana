@@ -17,13 +17,11 @@ class PropertyFactory extends Factory
     public function definition(): array
     {
         return [
-
             'propertiesType'=>$this->faker->randomElement(['Casa','Apartamento','Local','Almacén']),
             'zone'=>$this->faker->randomElement(['Belén','Poblado','Bello','Envigado']),
             'description'=>$this->faker->paragraph(),
             'address'=>$this->faker->address(),
-            'propertyImage'=>$this->faker->imageUrl()   
-                   
+            'propertyImage'=>$this->faker->imageUrl(),   
         ];
     }
     

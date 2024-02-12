@@ -7,6 +7,7 @@
     <h2 class="h2">Usuarios</H2>
 
     <button type="button" class="btn btn-crear btn-primary mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Crear usuario</button>
+    <a class="btn btn-primary mt-3 mb-3" href="{{ route('dating.create') }}">Agendar</a>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog">
         <div class="modal-content">
@@ -92,26 +93,7 @@
             </table>
         </div>
     </div>
+    
+    
 @endsection
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById("form_create_user").addEventListener("submit", function(event) {
-          // Verificar si el campo "formulario_enviado" tiene el valor "1"
-          if (document.querySelector('input[name="formulario_enviado"]').value === "1") {
-              // Validar otros campos aquí si es necesario
-              let input_name = document.querySelector("#input-name").value;
-              let input_identification = document.querySelector('#input-identification').value;
-              let input_age = document.querySelector("#input-age").value;
-              let input_email = document.querySelector("#input-email").value;
-              let formSelect = document.querySelector("#formSelect").value;
-
-              if (input_name === "" || input_identification === "" || input_age === "" || input_email === "" || formSelect === "Seleccionar Usuario") {
-                  alert("Todos los campos deben estar llenos")
-                  event.preventDefault(); // Evitar el envío del formulario
-              }
-              
-          }
-      });
-  });
-</script>

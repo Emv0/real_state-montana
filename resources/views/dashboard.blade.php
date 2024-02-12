@@ -9,7 +9,7 @@
         <h2>Tablero principal</h2>
     </div>
 
-    <!-- Content Row -->
+    {{-- <!-- Content Row -->
     <div class="row">
 
         <!-- Earnings (Monthly) Card Example -->
@@ -94,6 +94,35 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+    <a class="btn btn-primary mb-3" href="{{ route('dating.create') }}">Agendar</a>
+    <div class="card">
+        <div class="card-body">
+            <body>
+                <div id='calendar'></div>
+            </body>
+        </div>
     </div>
+    
 
 @endsection
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'timeGridWeek,timeGridDay' 
+        },
+        locale: 'es',
+        height:650,
+        themeSystem: 'bootstrap5',
+        events:@json($events)
+    });
+      calendar.render();
+    });
+
+  </script>
