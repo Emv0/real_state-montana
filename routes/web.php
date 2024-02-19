@@ -4,9 +4,7 @@ use App\Http\Controllers\DatingsController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
-use App\Mail\CodesMailable;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\ViewLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [homeController::class, 'index'])->name('home.index');
+
+Route::get('/login', [ViewLoginController::class, 'index'])->name('viewLog.index');
 
 Route::get('/inmuebles', [PropertyController::class, 'index'])->name('property.index');
 Route::post('inmuebles', [PropertyController::class, 'store'])->name('property.store');
@@ -38,10 +38,3 @@ Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])->name('use
 
 Route::get('/agenda/registrar', [DatingsController::class, 'create'])->name('dating.create');
 Route::post('/agenda', [DatingsController::class, 'store'])->name('dating.store');
-
-Route::get('enviar', function (Request $request) {
-    
-    Mail::to($request->email)
-        ->send(new CodesMailable);
-    return "Mensaje enviado";
-})->name('enviar');

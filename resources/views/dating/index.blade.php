@@ -10,15 +10,15 @@
                     @csrf
                     <input type="hidden" name="formulario_enviado" value="1">
                     <label for="input_title">Titulo</label>
-                    <input id="input_title" class="form-control" type="text" name="title" value="{{old('title')}}">
+                    <input id="input_title" class="form-control" type="text" name="title" value="{{ old('title') }}">
                     <label for="input_date">Fecha</label>
-                    <input id="input_date" class="form-control" type="date" name="date" value="{{old('date')}}">
+                    <input id="input_date" class="form-control" type="date" name="date" value="{{ old('date') }}">
                     <label for="input_time">Hora</label>
-                    <input id="input_time" class="form-control" type="time" name="time" value="{{old('time')}}">
+                    <input id="input_time" class="form-control" type="time" name="time" value="{{ old('time') }}">
                     <label for="floatingTextarea2">Descripción</label>
                     <div class="form-floating">
                         <textarea class="form-control" placeholder="" name="description" id="floatingTextarea2" style="height: 100px"
-                            cols="30" rows="10">{{old('description')}}</textarea>
+                            cols="30" rows="10">{{ old('description') }}</textarea>
                         <label for="floatingTextarea">Datos de la cita</label>
                     </div>
                     <div class="mt-4">
@@ -50,7 +50,9 @@
                             <option>-- Seleccione un asesor --</option>
                             @foreach ($users as $user)
                                 @if ($user->type_user == '3')
-                                    <option value="{{ $user->id }}"{{old('adviser_id') == $user->id ? "selected":""}}>{{ $user->name . ' - ' . $user->identification }}
+                                    <option
+                                        value="{{ $user->id }}"{{ old('adviser_id') == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name . ' - ' . $user->identification }}
                                     </option>
                                 @endif
                             @endforeach
@@ -66,7 +68,8 @@
                             id="userId">
                             <option>-- Seleccione un inmueble --</option>
                             @foreach ($properties as $property)
-                                <option value="{{ $property->id }}"{{old('property_id') == $property->id ? "selected" : ""  }}>
+                                <option
+                                    value="{{ $property->id }}"{{ old('property_id') == $property->id ? 'selected' : '' }}>
                                     {{ $property->propertiesType . ' - ' . $property->description . ' - ' . $property->address }}
                                 </option>
                             @endforeach

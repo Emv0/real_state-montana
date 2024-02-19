@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DatingsController;
+use App\Http\Controllers\LoginController;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +20,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('enviar', [LoginController::class, 'sendMail']);
+Route::post('identification', [LoginController::class, 'sendIdentification'])->name('api.sendIdentification');
+Route::post('code', [LoginController::class, 'sendCode'])->name('api.sendCode');
 
 //Route::apiResource('agenda',  DatingsController::class, ['store']);

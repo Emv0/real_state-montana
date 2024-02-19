@@ -22,7 +22,7 @@ class CodesMailable extends Mailable
 
     public function __construct()
     {
-        $this->variable = random_int( 100000 , 999999 );
+        $this->variable = random_int( 000000 , 999999 );
     }
 
     /**
