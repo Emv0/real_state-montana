@@ -43,7 +43,7 @@
         body.insertAdjacentHTML("beforeend",
             `
                 <div class="container row" style="padding-left: 15%;">
-                    <form method="POST">
+                    <form method="POST" id="formCode">
                         @csrf
                         <div class="container col-8 d-flex justify-content-center fs-4">
                             <label class="fw-bold">Código</label>
@@ -55,7 +55,7 @@
                             <input class="form-control fs-5 d-flex justify-content-center" type="number" name="code" id="inputCode" style="text-align: center; min="0">
                         </div>
                         <div class="container col-8 d-flex justify-content-center mt-3">
-                            <button id="buttonCode" type="button" onclick="sendCode()" class="fs-5 btn btn-primary">
+                            <button id="buttonCode" type="button" onclick="sendCode()" class="fs-5 btn-code btn btn-primary">
                                 Enviar
                             </button>
                         </div>
@@ -80,6 +80,12 @@
         fun.func();
     }
 
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+        }
+    });
+
     function sendId() {
         let identificationInput = document.querySelector("#identificationInput");
         let identificationValue = identificationInput.value;
@@ -89,6 +95,7 @@
                 identification: identificationValue
             })
             .then((res) => {
+                button.removeAttribute("onclick");
                 formId.setAttribute("hidden", "");
                 formCode();
                 Swal.fire({
@@ -108,7 +115,6 @@
                     showConfirmButton: false,
                     timer: 2000
                 });
-                    console.log("🚀 ~ sendId ~ err:", err)
             })
     }
 
@@ -124,8 +130,12 @@
                 window.location.href = 'http://127.0.0.1:8000/';
             })
             .catch((err) => {
-                console.log("🚀 ~ sendCode ~ err:", err.response.data[0])
-                
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: err.response.data[0],
+                    timer: 2000
+                });
             })
 
     }

@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dating;
+use App\Models\Login;
 use App\Models\Start;
 use Illuminate\Http\Request;
 
 class homeController extends Controller
 {
     public function index(){
+
+        $login = Login::where('authorization', true)->first();
+        if(!$login){
+            return redirect()->route('viewLog.index');
+        }
         $datings = Dating::all();
         
         $events = [];
@@ -24,6 +30,8 @@ class homeController extends Controller
             ];
         }
 
+        $login->authorization = false;  
+        $login->save();  
         return view('dashboard',compact('events')); 
     }
 

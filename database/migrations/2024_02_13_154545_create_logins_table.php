@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("identification");
             $table->string("code");
+            $table->boolean("authorization")->nullable();
             $table->timestamps();
         });
     }
