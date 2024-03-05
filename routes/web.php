@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\DatingsController;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViewLoginController;
+use App\Models\Login;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +23,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [homeController::class, 'index'])->name('home.index');
 
-Route::get('/login', [ViewLoginController::class, 'index'])->name('viewLog.index');
+
+Route::get('/login', function(){
+    if(Auth::check()){
+        return redirect(route('home.index'));
+    }else{
+        return view('begins/index');
+    }
+})->name('viewLog.index');
 
 Route::get('/inmuebles', [PropertyController::class, 'index'])->name('property.index');
-Route::post('inmuebles', [PropertyController::class, 'store'])->name('property.store');
+Route::post('inmuebles', [PropertyController::class, 'store'])->name('property.store'); 
 Route::get('/inmuebles/{property}/editar', [PropertyController::class, 'edit'])->name('property.edit');
 Route::get('/inmuebles/{property}', [PropertyController::class, 'show'])->name('property.show');
 Route::put('/inmuebles/{property}', [PropertyController::class, 'update'])->name('property.update');

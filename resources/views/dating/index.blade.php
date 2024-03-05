@@ -14,7 +14,7 @@
                     <label for="input_date">Fecha</label>
                     <input id="input_date" class="form-control" type="date" name="date" value="{{ old('date') }}">
                     <label for="input_time">Hora</label>
-                    <input id="input_time" class="form-control" type="time" name="time" value="{{ old('time') }}">
+                    <input id="input_time" class="form-control" type="time" name="time" value="{{ old('time') }}" min="08:00:00" max="17:00:00">
                     <label for="floatingTextarea2">Descripción</label>
                     <div class="form-floating">
                         <textarea class="form-control" placeholder="" name="description" id="floatingTextarea2" style="height: 100px"
@@ -88,6 +88,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+
 
             let today = new Date().toISOString().split('T')[0];
 

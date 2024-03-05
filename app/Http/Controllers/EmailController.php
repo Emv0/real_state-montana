@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CodesMailable;
+use App\Mail\DateMailable;
 use Illuminate\Http\Request;
 
 class EmailController extends Controller
@@ -18,4 +19,10 @@ class EmailController extends Controller
         return $code;
     }
 
+    public function sendDate($email){
+        $mail = new DateMailable;
+        $mail->content()->with(['property_address', 'adviser_name', 'hour', 'date']);
+        Mail::to($email)
+            ->send($mail);
+    }
 }

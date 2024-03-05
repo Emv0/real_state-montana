@@ -18,9 +18,9 @@ return new class extends Migration
             $table->time('time');
             $table->longText('description');
             $table->boolean('availability');
-            $table->foreignId('adviser_id')->references('id')->on('users');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('property_id')->references('id')->on('properties');
+            $table->foreignId('adviser_id')->nullable()->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('property_id')->nullable()->references('id')->on('properties')->onDelete('cascade');
             $table->timestamps();
         });
     }

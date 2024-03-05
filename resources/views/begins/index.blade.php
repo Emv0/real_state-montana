@@ -127,13 +127,16 @@
                 identification: identificationValue
             })
             .then((response) => {
-                window.location.href = 'http://127.0.0.1:8000/';
+                console.log(response.data);
+                // axios.get("{{ route('property.index') }}");
+                // localStorage.setItem("name", response.data.name);
+                window.location.href = response.data.redirect;
             })
             .catch((err) => {
                 Swal.fire({
                     position: "center",
                     icon: "error",
-                    title: err.response.data[0],
+                    title: err.response.data,
                     timer: 2000
                 });
             })

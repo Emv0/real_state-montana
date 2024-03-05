@@ -8,6 +8,7 @@ use App\Models\TypesUsers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use PharIo\Manifest\Email;
 
 use function Laravel\Prompts\error;
 
@@ -98,6 +99,12 @@ class DatingsController extends Controller
             $dating->property_id  = $request->property_id;
             $dating->availability = $request->availability;
             $dating->save();
+
+            $user = User::where('id', $request->user_id)->first();
+
+            $sendMail = new EmailController;
+            $sendMail->sendDate($user->email);
+
             return redirect()->route('home.index');
             /* return redirect()->route('dating.create'); */
         }
